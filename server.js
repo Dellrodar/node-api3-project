@@ -1,4 +1,5 @@
 const express = require('express');
+const logger = require('./middleware/logger');
 
 const server = express();
 
@@ -7,7 +8,6 @@ server.get('/', (req, res) => {
 });
 
 //custom middleware
-
-function logger(req, res, next) {}
+server.use(logger());
 
 module.exports = server;
