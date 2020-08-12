@@ -1,13 +1,15 @@
 const express = require('express');
+const {validateUserId, validateUser} = require('../middleware/users');
+const {validatePost} = require('../middleware/posts');
 
 const router = express.Router();
 
 router.post('/', (req, res) => {
-  // do your magic!
+  return res.status(200);
 });
 
-router.post('/:id/posts', (req, res) => {
-  // do your magic!
+router.post('/:id/posts',  (req, res) => {
+
 });
 
 router.get('/', (req, res) => {
