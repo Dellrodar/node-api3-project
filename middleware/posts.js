@@ -1,15 +1,31 @@
+const db = require('../posts/postDb');
+
 const validatePost = () => {
-  return (req, res, next) => {
     if (!req.body) {
-      res.status(400).json({ message: "missing post data" });
+      return res.status(400).json({ message: "missing post data" });
     }
     if (!req.body.text) {
-      res.status(400).json({ message: "missing required text field" });
+      return res.status(400).json({ message: "missing required text field" });
     }
-    next();
+    return next();
   }
+}
+
+function validatePostId (req, res, next) {
+postDb.getById(req.params.id)
+  .then((posts)=> {
+    if(posts){
+      req.post = posts
+      next()
+    }
+      return res.status(400).json({message: "Post not found."})
+  })
+  .catch((error)=>{
+    next(error)
+  })
 }
 
 module.exports = {
   validatePost,
+  validatePostId
 };

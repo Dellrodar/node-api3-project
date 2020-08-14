@@ -6,7 +6,7 @@ const validateUserId = () => {
     .then((user) => {
       if (user) {
         req.user = user;
-        next();
+        return next();
       }
          return res.status(400).json({ message: "invalid user id" })
     })
@@ -25,7 +25,7 @@ const validateUser = () => {
     if (!req.body.text) {
       res.status(400).json({ message: "missing required text field" })
     }
-    next();
+    return next();
   }
 }
 
