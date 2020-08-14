@@ -9,7 +9,6 @@ const validatePost = () => {
     }
     return next();
   }
-}
 
 function validatePostId (req, res, next) {
 postDb.getById(req.params.id)
