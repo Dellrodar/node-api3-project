@@ -5,8 +5,16 @@ const logger = require('./middleware/logger');
 
 const server = express();
 server.use(express.json({}))
-server.use(postsRouter);
-server.use(usersRouter);
+server.use('/api/users', usersRouter);
+server.use('/api/posts', postsRouter);
+
+server.use((err, req, res, next) => {
+  console.log(err);
+	res.status(500).json({
+		message: "Something went wrong, please try again later",
+	});
+});
+
 //custom middleware
 server.use(logger());
 
